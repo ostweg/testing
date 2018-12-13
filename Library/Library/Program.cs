@@ -10,17 +10,53 @@ namespace Library
     {
         static void Main(string[] args)
         {
-            using(var dc= new LibraryContext())
-            {
-                Book b1 = new Book();
-                b1.Title = "test";
-                b1.Beschreibung = "test der teste";
-                dc.book.Add(b1);
-                dc.SaveChanges();
-
-                dc.book.ToList().ForEach(x => Console.WriteLine(x.Title + x.Beschreibung));
-            }      
+            Menu();
+            
         }
-        
+
+        static void Menu()
+        {
+            Console.WriteLine("Welcome to your Librarymanagment");
+            Console.WriteLine("A: Create a Book");
+            Console.WriteLine("B: Display Books");
+            Console.WriteLine("C: Add a Customer");
+            Console.WriteLine("D: Display Customers");
+            Console.WriteLine("E: Add a Rental");
+            Console.WriteLine("F: Return a Rental");
+            Console.WriteLine("G: Display all open Rentals");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "A":
+                    CreateBook();
+                    break;
+                case "B":
+                    DisplayBook();
+                    break;
+                case "C":
+                    CreateCustomer();
+                    break;
+                case "D":
+                    DisplayCustomer();
+                    break;
+                case "E":
+                    AddRental();
+                    break;
+                case "F":
+                    ReturnRental();
+                    break;
+                case "G":
+                    DisplayOpenRentals();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input");
+                    Menu();
+                    break;
+                    
+                    
+            }
+
+        }
+
     }
 }
