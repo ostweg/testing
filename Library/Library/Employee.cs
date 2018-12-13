@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    class Mitarbeiter : Person
+    class Employee : Person
     {
         public int Salary { get; set; }
     }

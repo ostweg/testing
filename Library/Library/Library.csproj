@@ -53,7 +53,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="LibraryContext.cs" />
-    <Compile Include="Mitarbeiter.cs" />
+    <Compile Include="Employee.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

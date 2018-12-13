@@ -8,14 +8,10 @@ namespace Library
 {
     class Program
     {
-        string TitleOfBook;
-        string ShortDescriptionOfBook;
-        string NameOfAuthor;
-        int IsbnOfBook;
-        double PricePerMonth;
-        string LanguageIso;
+        public static LibraryContext Context = new LibraryContext();
         static void Main(string[] args)
         {
+
             Menu();
             
         }
@@ -61,35 +57,18 @@ namespace Library
                     
                     
             }
-            
+
         }
-        public void CreateBook()
+
+        private static void DisplayBook()
         {
-            Console.WriteLine("Enter Title of book");
-            TitleOfBook = Console.ReadLine();
-            Console.WriteLine("Enter short Description of book");
-            ShortDescriptionOfBook = Console.ReadLine();
-            Console.WriteLine("Enter name of author");
-            NameOfAuthor = Console.ReadLine();
-            Console.WriteLine("Enter isbn");
-            IsbnOfBook = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Enter price/month in CHF");
-            PricePerMonth = Double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter language ISO");
-            LanguageIso = Console.ReadLine();
-
-            using(var v1 = new Context())
+           
+            foreach (var book in Context.Book)
             {
-                Book b1 = new Book();
-                b1.Title = TitleOfBook;
-                b1.Description = ShortDescriptionOfBook;
-                b1.Author = NameOfAuthor;
-                b1.ISBN = IsbnOfBook;
+                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentpriceinCHF,book.languageISO);
+                
             }
-            
-
 
         }
-
     }
 }
