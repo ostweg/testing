@@ -11,8 +11,16 @@ namespace Library
         public static LibraryContext Context = new LibraryContext();
         static void Main(string[] args)
         {
-
-            Menu();
+            Console.WriteLine("Enter Employee Name");
+            string name = Console.ReadLine();
+            if (EmployeeExist(name))
+            {
+                Menu();
+            }else
+            {
+                Console.WriteLine("Employee doesn't exits");
+            }
+            
             
         }
 
@@ -58,6 +66,16 @@ namespace Library
                     
             }
 
+        }
+
+        private static bool EmployeeExist(string employeefirstname)
+        {
+           string usr = Context.Employee.Find(employeefirstname).ToString();
+            if(usr != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         private static void AddRental()
