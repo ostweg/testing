@@ -59,27 +59,31 @@ namespace Library
             }
 
         }
+
+        private static void AddRental()
+        {
+            Console.WriteLine("Enter ISBN");
+            var BookISBN = Int32.Parse(Console.ReadLine());
+            if (Context.Rental.Find(BookISBN) == null)
+            {
+
+            }
+        }
+
         private static void CreateBook()
         {
-            string TitleOfBook;
-            string ShortDescriptionOfBook;
-            string NameOfAuthor;
-            int IsbnOfBook;
-            double PricePerMonth;
-            string LanguageIso;
-
             Console.WriteLine("Enter Title of book");
-            TitleOfBook = Console.ReadLine();
+            var TitleOfBook = Console.ReadLine();
             Console.WriteLine("Enter short Description of book");
-            ShortDescriptionOfBook = Console.ReadLine();
+            var ShortDescriptionOfBook = Console.ReadLine();
             Console.WriteLine("Enter name of author");
-            NameOfAuthor = Console.ReadLine();
+            var NameOfAuthor = Console.ReadLine();
             Console.WriteLine("Enter isbn");
-            IsbnOfBook = Int32.Parse(Console.ReadLine());
+            var IsbnOfBook = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Enter price/month in CHF");
-            PricePerMonth = Double.Parse(Console.ReadLine());
+            var PricePerMonth = Double.Parse(Console.ReadLine());
             Console.WriteLine("Enter language ISO");
-            LanguageIso = Console.ReadLine();
+            var LanguageIso = Console.ReadLine();
 
 
             Book b1 = new Book();
