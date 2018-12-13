@@ -60,7 +60,7 @@ namespace Library
             }
 
         }
-        public static void CreateBook()
+        private static void CreateBook()
         {
             string TitleOfBook;
             string ShortDescriptionOfBook;
@@ -101,10 +101,11 @@ namespace Library
            
             foreach (var book in Context.Book)
             {
-                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentpriceinCHF,book.languageISO);
+                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentPriceCHF,book.LanguageISO);
                 
             }
 
         }
+       
     }
 }
