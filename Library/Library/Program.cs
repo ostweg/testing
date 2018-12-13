@@ -60,12 +60,37 @@ namespace Library
 
         }
 
+        private static void DisplayCustomer()
+        {
+            foreach (var customer in Context.Customer)
+            {
+                Console.WriteLine("Name:{0} Firstname:{1} ",customer.LastName,customer.FirstName);
+
+            }
+
+
+        }
+
+        private static void CreateCustomer()
+        {
+            Console.WriteLine("Enter the Customers Name");
+            string lastname = Console.ReadLine();
+            Console.WriteLine("Enter the Customers firstname");
+            string firstname = Console.ReadLine();
+            Customer customer = new Customer();
+            customer.LastName = lastname;
+            customer.FirstName = firstname;
+            Context.Customer.Add(customer);
+            Context.SaveChanges();
+
+        }
+
         private static void DisplayBook()
         {
            
             foreach (var book in Context.Book)
             {
-                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentpriceinCHF,book.languageISO);
+                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentPriceCHF,book.LanguageISO);
                 
             }
 
