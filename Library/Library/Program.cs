@@ -8,8 +8,10 @@ namespace Library
 {
     class Program
     {
+        public static LibraryContext Context = new LibraryContext();
         static void Main(string[] args)
         {
+
             Menu();
             
         }
@@ -58,5 +60,15 @@ namespace Library
 
         }
 
+        private static void DisplayBook()
+        {
+           
+            foreach (var book in Context.Book)
+            {
+                Console.WriteLine("Booktitle:{0} Author:{1} ISBN{2} Rentprice:{3} Language:{4}",book.Title,book.Author,book.ISBN,book.RentpriceinCHF,book.languageISO);
+                
+            }
+
+        }
     }
 }
