@@ -14,13 +14,18 @@ namespace Library
         public Book Book { get; set; }
         public Customer Customers { get; set; }
         public Employee Employee { get; set; }
+        public DateTime RentalDate { get; set; }
+        public bool returned { get; set; }
+        public Rental()
+        {
+        }
 
-
-        public Rental(Book book, Customer customers, Employee employee)
+        public Rental(Book book, Customer customers, Employee employee,DateTime rentalDate)
         {
             Book = book;
             Customers = customers;
             Employee = employee;
+            RentalDate = rentalDate;
         }
     }
 }

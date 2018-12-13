@@ -81,11 +81,20 @@ namespace Library
         private static void AddRental()
         {
             Console.WriteLine("Enter ISBN");
-            var BookISBN = Int32.Parse(Console.ReadLine());
-            if (Context.Rental.Find(BookISBN) == null)
+            int? BookISBN = Int32.Parse(Console.ReadLine());
+            if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
             {
+                Console.WriteLine("The Book is already rented");
 
             }
+
+            Console.WriteLine("Enter the firstname of the Customer");
+            var customerfirstname = Console.ReadLine();
+            Rental rental = new Rental();
+            rental.Book = Context.Book.Find(BookISBN);
+            rental.Customers = Context.Customer.Find(customerfirstname);
+            rental.RentalDate = DateTime.Today;
+            //rental.Employee = employee
         }
 
         private static void CreateBook()
