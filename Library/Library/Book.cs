@@ -15,10 +15,12 @@ namespace Library
         public string Description { get; set; }
         public string Author { get; set; }
         public int ISBN { get; set; }
-        
+        public double RentPriceCHF { get; set; }
+        public string LanguageISO { get; set; }
         public Book()
         {
 
         }
+        
     }
 }
