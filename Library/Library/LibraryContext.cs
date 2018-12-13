@@ -13,5 +13,6 @@ namespace Library
         public DbSet<Book> Book { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Rental> Rental { get; set; }
     }
 }
