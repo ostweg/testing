@@ -12,6 +12,7 @@ namespace Library
         public Customer Customers { get; set; }
         public Employee Employee { get; set; }
 
+
         public Rental(Book book, Customer customers, Employee employee)
         {
             Book = book;
