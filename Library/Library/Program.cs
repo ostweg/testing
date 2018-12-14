@@ -21,9 +21,6 @@ namespace Library
             if (EmployeeExist(name,e1.id))
             {
                 Menu();
-            }else
-            {
-                Console.WriteLine("Employee doesn't exits");
             }
             
             
@@ -76,13 +73,21 @@ namespace Library
         private static bool EmployeeExist(string employeefirstname, int id)
         {
             //string usr = Context.Employee.Find(employeefirstname).ToString();
-            var usr1 = Context.Employee.Where(x => x.id == id && x.FirstName == employeefirstname).FirstOrDefault().ToString();
            
-            if(usr1 != null)
+            try
             {
-                return true;
+                var usr1 = Context.Employee.Where(x => x.id == id && x.FirstName == employeefirstname).FirstOrDefault().ToString();
+                if (usr1 != null)
+                {
+                    return true;
+                }
+                
+            }catch(Exception)
+            {
+                Console.WriteLine("Employee doesn't exits");
             }
             return false;
+
         }
 
         private static void AddRental()
