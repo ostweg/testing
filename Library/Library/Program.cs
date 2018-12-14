@@ -11,9 +11,14 @@ namespace Library
         public static LibraryContext Context = new LibraryContext();
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter Employee Name");
+            Employee e1 = new Employee();
+            e1.FirstName = "John";
+            e1.LastName = "Murrica";
+            Context.Employee.Add(e1);
+            Context.SaveChanges();
+            Console.WriteLine("Enter Employee Firstname");
             string name = Console.ReadLine();
-            if (EmployeeExist(name))
+            if (EmployeeExist(name,e1.id))
             {
                 Menu();
             }else
@@ -53,10 +58,10 @@ namespace Library
                     AddRental();
                     break;
                 case "F":
-                    ReturnRental();
+                    //ReturnRental();
                     break;
                 case "G":
-                    DisplayOpenRentals();
+                    //DisplayOpenRentals();
                     break;
                 default:
                     Console.WriteLine("Invalid input");
@@ -68,10 +73,12 @@ namespace Library
 
         }
 
-        private static bool EmployeeExist(string employeefirstname)
+        private static bool EmployeeExist(string employeefirstname, int id)
         {
-           string usr = Context.Employee.Find(employeefirstname).ToString();
-            if(usr != null)
+            //string usr = Context.Employee.Find(employeefirstname).ToString();
+            var usr1 = Context.Employee.Where(x => x.id == id && x.FirstName == employeefirstname).FirstOrDefault().ToString();
+           
+            if(usr1 != null)
             {
                 return true;
             }

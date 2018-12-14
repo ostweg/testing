@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Library
 {
@@ -14,5 +15,7 @@ namespace Library
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Rental> Rental { get; set; }
+
+      
     }
 }
