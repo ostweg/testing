@@ -68,7 +68,7 @@ namespace Library
                         ReturnRental();
                         break;
                     case "G":
-                        //DisplayOpenRentals();
+                        DisplayOpenRentals();
                         break;
                     default:
                         Console.WriteLine("Invalid input");
