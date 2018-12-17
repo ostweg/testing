@@ -72,6 +72,8 @@ namespace Library
                     case "G":
                         DisplayOpenRentals();
                         break;
+                    case "e": Environment.Exit(1);
+                        break;
                     default:
                         Console.WriteLine("Invalid input");
                         Menu();
@@ -106,6 +108,7 @@ namespace Library
                 var price =  rental.Book.RentPriceCHF / 7 * 0.1 * datediff.TotalDays;
                 Console.WriteLine("The rental costed:{0}",price);
                 Context.Rental.Remove(rental);
+                Context.SaveChanges();
             }
         }
 
