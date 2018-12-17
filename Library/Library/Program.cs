@@ -18,7 +18,9 @@ namespace Library
             Context.SaveChanges();
             Console.WriteLine("Enter Employee Firstname");
             string name = Console.ReadLine();
-            if (EmployeeExist(name,e1.id))
+            Console.WriteLine("Enter Employee Lastname");
+            string lastname = Console.ReadLine();
+            if (EmployeeExist(name,lastname))
             {
                 Menu();
             }
@@ -33,45 +35,49 @@ namespace Library
 
         static void Menu()
         {
-            Console.WriteLine("Welcome to your Librarymanagment");
-            Console.WriteLine("A: Create a Book");
-            Console.WriteLine("B: Display Books");
-            Console.WriteLine("C: Add a Customer");
-            Console.WriteLine("D: Display Customers");
-            Console.WriteLine("E: Add a Rental");
-            Console.WriteLine("F: Return a Rental");
-            Console.WriteLine("G: Display all open Rentals");
-            string input = Console.ReadLine();
-            switch (input)
+            string input;
+            do
             {
-                case "A":
-                    CreateBook();
-                    break;
-                case "B":
-                    DisplayBook();
-                    break;
-                case "C":
-                    CreateCustomer();
-                    break;
-                case "D":
-                    DisplayCustomer();
-                    break;
-                case "E":
-                    AddRental();
-                    break;
-                case "F":
-                    ReturnRental();
-                    break;
-                case "G":
-                    //DisplayOpenRentals();
-                    break;
-                default:
-                    Console.WriteLine("Invalid input");
-                    Menu();
-                    break;
-                    
-                    
-            }
+                Console.WriteLine("Welcome to your Librarymanagment");
+                Console.WriteLine("A: Create a Book");
+                Console.WriteLine("B: Display Books");
+                Console.WriteLine("C: Add a Customer");
+                Console.WriteLine("D: Display Customers");
+                Console.WriteLine("E: Add a Rental");
+                Console.WriteLine("F: Return a Rental");
+                Console.WriteLine("G: Display all open Rentals");
+                 input = Console.ReadLine();
+                switch (input)
+                {
+                    case "A":
+                        CreateBook();
+                        break;
+                    case "B":
+                        DisplayBook();
+                        break;
+                    case "C":
+                        CreateCustomer();
+                        break;
+                    case "D":
+                        DisplayCustomer();
+                        break;
+                    case "E":
+                        AddRental();
+                        break;
+                    case "F":
+                        ReturnRental();
+                        break;
+                    case "G":
+                        //DisplayOpenRentals();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        Menu();
+                        break;
+
+
+                }
+            } while (input != "e");
 
         }
 
@@ -90,13 +96,13 @@ namespace Library
             }
         }
 
-        private static bool EmployeeExist(string employeefirstname, int id)
+        private static bool EmployeeExist(string employeefirstname, string employeelastname)
         {
             //string usr = Context.Employee.Find(employeefirstname).ToString();
            
             try
             {
-                var usr1 = Context.Employee.FirstOrDefault(x => x.id == id && x.FirstName == employeefirstname).ToString();
+                var usr1 = Context.Employee.FirstOrDefault(x => x.LastName == employeelastname && x.FirstName == employeefirstname).ToString();
                 if (usr1 != null)
                 {
                     return true;
