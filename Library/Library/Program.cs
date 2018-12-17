@@ -22,6 +22,11 @@ namespace Library
             {
                 Menu();
             }
+            else
+            {
+                Console.WriteLine("Wrong employee");
+                Environment.Exit(1);
+            }
             
             
         }
@@ -55,7 +60,7 @@ namespace Library
                     AddRental();
                     break;
                 case "F":
-                    //ReturnRental();
+                    ReturnRental();
                     break;
                 case "G":
                     //DisplayOpenRentals();
@@ -70,13 +75,28 @@ namespace Library
 
         }
 
+        private static void ReturnRental()
+        {
+            Console.WriteLine("Enter the Books ISBN");
+            string ISBN = Console.ReadLine();
+            var rental = Context.Rental.Find(ISBN);
+            if (rental != null)
+            {
+                rental.returned = true;
+                var datediff = DateTime.Today - rental.RentalDate;
+                var price =  rental.Book.RentPriceCHF / 7 * 0.1 * datediff.TotalDays;
+                Console.WriteLine("The rental costed:{0}",price);
+                Context.Rental.Remove(rental);
+            }
+        }
+
         private static bool EmployeeExist(string employeefirstname, int id)
         {
             //string usr = Context.Employee.Find(employeefirstname).ToString();
            
             try
             {
-                var usr1 = Context.Employee.Where(x => x.id == id && x.FirstName == employeefirstname).FirstOrDefault().ToString();
+                var usr1 = Context.Employee.FirstOrDefault(x => x.id == id && x.FirstName == employeefirstname).ToString();
                 if (usr1 != null)
                 {
                     return true;
@@ -134,7 +154,7 @@ namespace Library
             b1.RentPriceCHF = PricePerMonth;
             Context.Book.Add(b1);
             Context.SaveChanges();
-
+            
 
 
         }
