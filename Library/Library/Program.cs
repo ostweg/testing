@@ -72,8 +72,7 @@ namespace Library
                     case "G":
                         DisplayOpenRentals();
                         break;
-                    case "e":
-                        System.Environment.Exit(1);
+                    case "e": Environment.Exit(1);
                         break;
                     default:
                         Console.WriteLine("Invalid input");
@@ -104,11 +103,11 @@ namespace Library
             var rental = Context.Rental.Find(ISBN);
             if (rental != null)
             {
-                rental.returned = true;
+                rental.EndDate = DateTime.Today;
                 var datediff = DateTime.Today - rental.RentalDate;
                 var price =  rental.Book.RentPriceCHF / 7 * 0.1 * datediff.TotalDays;
                 Console.WriteLine("The rental costed:{0}",price);
-                Context.Rental.Remove(rental);
+                Context.SaveChanges();
             }
         }
 
@@ -118,7 +117,7 @@ namespace Library
            
             try
             {
-                var usr1 = Context.Employee.FirstOrDefault(x => x.LastName == employeelastname && x.FirstName == employeefirstname).ToString();
+                var usr1 = Context.Employee.FirstOrDefault(x => x.LastName == employeelastname && x.FirstName == employeefirstname)?.ToString();
                 if (usr1 != null)
                 {
                     return true;
@@ -134,20 +133,14 @@ namespace Library
 
         private static void AddRental()
         {
-           
+            Console.WriteLine("Enter ISBN");
             int? BookISBN = Int32.Parse(Console.ReadLine());
-            var hasOpenRentals = Context.Rental.Any(m => m.Book.ISBN == BookISBN && !m.returned);
-            if (hasOpenRentals)
+            if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
             {
                 Console.WriteLine("The Book is already rented");
+
             }
 
-            /*if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
-            {
-                Console.WriteLine("The Book is already rented");
-
-            }*/
-            
             Console.WriteLine("Enter the firstname of the Customer");
             var customerfirstname = Console.ReadLine();
             Rental rental = new Rental();

@@ -15,7 +15,7 @@ namespace Library
         public virtual Customer Customers { get; set; }
         public virtual Employee Employee { get; set; }
         public DateTime RentalDate { get; set; }
-        public bool returned { get; set; }
+        public DateTime? EndDate { get; set; }
         public Rental()
         {
         }
