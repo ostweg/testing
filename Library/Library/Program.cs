@@ -9,7 +9,6 @@ namespace Library
     class Program
     {
         public static LibraryContext Context = new LibraryContext();
-       
         static void Main(string[] args)
         {
             Employee e1 = new Employee();
@@ -19,11 +18,14 @@ namespace Library
             Context.SaveChanges();
             Console.WriteLine("Enter Employee Firstname");
             string name = Console.ReadLine();
-            Console.WriteLine("Enter Employee Lastname");
-            string lname = Console.ReadLine();
-            if (EmployeeExist(name,lname))
+            if (EmployeeExist(name,e1.id))
             {
                 Menu();
+            }
+            else
+            {
+                Console.WriteLine("Wrong employee");
+                Environment.Exit(1);
             }
             
             
@@ -31,65 +33,70 @@ namespace Library
 
         static void Menu()
         {
-            string input;
-            do
+            Console.WriteLine("Welcome to your Librarymanagment");
+            Console.WriteLine("A: Create a Book");
+            Console.WriteLine("B: Display Books");
+            Console.WriteLine("C: Add a Customer");
+            Console.WriteLine("D: Display Customers");
+            Console.WriteLine("E: Add a Rental");
+            Console.WriteLine("F: Return a Rental");
+            Console.WriteLine("G: Display all open Rentals");
+            string input = Console.ReadLine();
+            switch (input)
             {
-                Console.WriteLine("Welcome to your Librarymanagment");
-                Console.WriteLine("A: Create a Book");
-                Console.WriteLine("B: Display Books");
-                Console.WriteLine("C: Add a Customer");
-                Console.WriteLine("D: Display Customers");
-                Console.WriteLine("E: Add a Rental");
-                Console.WriteLine("F: Return a Rental");
-                Console.WriteLine("G: Display all open Rentals");
-                Console.WriteLine("e: Exit");
-                input = Console.ReadLine();
-                switch (input)
-                {
-                    case "A":
-                        CreateBook();
-                        break;
-                    case "B":
-                        DisplayBook();
-                        break;
-                    case "C":
-                        CreateCustomer();
-                        break;
-                    case "D":
-                        DisplayCustomer();
-                        break;
-                    case "E":
-                        AddRental();
-                        break;
-                    case "F":
-                        //ReturnRental();
-                        break;
-                    case "G":
-                        //DisplayOpenRentals();
-                        break;
-                    case "e":
-                        System.Environment.Exit(1);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input");
-                        Menu();
-                        break;
-
-
-                }
-               
-            } while (input != "e");
-           
+                case "A":
+                    CreateBook();
+                    break;
+                case "B":
+                    DisplayBook();
+                    break;
+                case "C":
+                    CreateCustomer();
+                    break;
+                case "D":
+                    DisplayCustomer();
+                    break;
+                case "E":
+                    AddRental();
+                    break;
+                case "F":
+                    ReturnRental();
+                    break;
+                case "G":
+                    //DisplayOpenRentals();
+                    break;
+                default:
+                    Console.WriteLine("Invalid input");
+                    Menu();
+                    break;
+                    
+                    
+            }
 
         }
 
-        private static bool EmployeeExist(string employeefirstname, string employeelastname)
+        private static void ReturnRental()
+        {
+            Console.WriteLine("Enter the Books ISBN");
+            string ISBN = Console.ReadLine();
+            var rental = Context.Rental.Find(ISBN);
+            if (rental != null)
+            {
+                rental.returned = true;
+                var datediff = DateTime.Today - rental.RentalDate;
+                var price =  rental.Book.RentPriceCHF / 7 * 0.1 * datediff.TotalDays;
+                Console.WriteLine("The rental costed:{0}",price);
+                Context.Rental.Remove(rental);
+            }
+        }
+
+        private static bool EmployeeExist(string employeefirstname, int id)
         {
             //string usr = Context.Employee.Find(employeefirstname).ToString();
            
             try
             {
-                var usr1 = Context.Employee.Where(x => x.LastName == employeelastname && x.FirstName == employeefirstname).FirstOrDefault().ToString();
+                var usr1 = Context.Employee.FirstOrDefault(x => x.id == id && x.FirstName == employeefirstname).ToString();
                 if (usr1 != null)
                 {
                     return true;
@@ -147,7 +154,7 @@ namespace Library
             b1.RentPriceCHF = PricePerMonth;
             Context.Book.Add(b1);
             Context.SaveChanges();
-           
+            
 
 
         }
