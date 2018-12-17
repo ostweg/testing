@@ -103,11 +103,10 @@ namespace Library
             var rental = Context.Rental.Find(ISBN);
             if (rental != null)
             {
-                rental.returned = true;
+                rental.EndDate = DateTime.Today;
                 var datediff = DateTime.Today - rental.RentalDate;
                 var price =  rental.Book.RentPriceCHF / 7 * 0.1 * datediff.TotalDays;
                 Console.WriteLine("The rental costed:{0}",price);
-                Context.Rental.Remove(rental);
                 Context.SaveChanges();
             }
         }
@@ -118,7 +117,7 @@ namespace Library
            
             try
             {
-                var usr1 = Context.Employee.FirstOrDefault(x => x.LastName == employeelastname && x.FirstName == employeefirstname).ToString();
+                var usr1 = Context.Employee.FirstOrDefault(x => x.LastName == employeelastname && x.FirstName == employeefirstname)?.ToString();
                 if (usr1 != null)
                 {
                     return true;
