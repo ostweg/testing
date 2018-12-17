@@ -79,7 +79,7 @@ namespace Library
                 }
                
             } while (input != "e");
-            Console.Clear();
+           
 
         }
 
