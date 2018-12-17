@@ -38,6 +38,8 @@ namespace Library
             string input;
             do
             {
+
+
                 Console.WriteLine("Welcome to your Librarymanagment");
                 Console.WriteLine("A: Create a Book");
                 Console.WriteLine("B: Display Books");
@@ -46,7 +48,7 @@ namespace Library
                 Console.WriteLine("E: Add a Rental");
                 Console.WriteLine("F: Return a Rental");
                 Console.WriteLine("G: Display all open Rentals");
-                 input = Console.ReadLine();
+                input = Console.ReadLine();
                 switch (input)
                 {
                     case "A":
@@ -78,7 +80,18 @@ namespace Library
 
                 }
             } while (input != "e");
+        } 
 
+
+        
+
+        private static void DisplayOpenRentals()
+        {
+            foreach (var rental in Context.Rental)
+            {
+                Console.WriteLine("Customer: {0},{1} has rented this Book: {2} since {3}",rental.Customers.LastName, rental.Customers.FirstName, rental.Book.Title,rental.RentalDate);
+                
+            }
         }
 
         private static void ReturnRental()
