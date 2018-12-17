@@ -54,6 +54,15 @@
     <Compile Include="Customer.cs" />
     <Compile Include="LibraryContext.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Migrations\201812141024255_InitialCreate.cs" />
+    <Compile Include="Migrations\201812141024255_InitialCreate.Designer.cs">
+      <DependentUpon>201812141024255_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812171003072_EndDate.cs" />
+    <Compile Include="Migrations\201812171003072_EndDate.Designer.cs">
+      <DependentUpon>201812171003072_EndDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +71,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812141024255_InitialCreate.resx">
+      <DependentUpon>201812141024255_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812171003072_EndDate.resx">
+      <DependentUpon>201812171003072_EndDate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

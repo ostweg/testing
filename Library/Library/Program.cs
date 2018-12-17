@@ -8,10 +8,11 @@ namespace Library
 {
     class Program
     {
+        public static Employee e1;
         public static LibraryContext Context = new LibraryContext();
         static void Main(string[] args)
         {
-            Employee e1 = new Employee();
+            e1 = new Employee();
             e1.FirstName = "John";
             e1.LastName = "Murrica";
             Context.Employee.Add(e1);
@@ -135,7 +136,8 @@ namespace Library
         {
             Console.WriteLine("Enter ISBN");
             int? BookISBN = Int32.Parse(Console.ReadLine());
-            if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
+            var c = Context.Rental.Any(m => m.Book.ISBN == BookISBN && m.RentalDate != null);
+            if (c)
             {
                 Console.WriteLine("The Book is already rented");
 
@@ -145,8 +147,11 @@ namespace Library
             var customerfirstname = Console.ReadLine();
             Rental rental = new Rental();
             rental.Book = Context.Book.Find(BookISBN);
-            rental.Customers = Context.Customer.Find(customerfirstname);
+            rental.Customers = Context.Customer.FirstOrDefault(o=>o.FirstName == customerfirstname);
             rental.RentalDate = DateTime.Today;
+            rental.Employee = e1;
+            Context.Rental.Add(rental);
+            Context.SaveChanges();
             //rental.Employee = employee
         }
 
