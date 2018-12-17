@@ -17,10 +17,16 @@ namespace Library
         public int ISBN { get; set; }
         public double RentPriceCHF { get; set; }
         public string LanguageISO { get; set; }
+
+        public virtual ICollection<Rental> Rentals { get; set; }
         public Book()
         {
 
         }
-        
+
+        internal static Book GetByIsbn(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

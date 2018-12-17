@@ -72,6 +72,9 @@ namespace Library
                     case "G":
                         DisplayOpenRentals();
                         break;
+                    case "e":
+                        System.Environment.Exit(1);
+                        break;
                     default:
                         Console.WriteLine("Invalid input");
                         Menu();
@@ -131,14 +134,20 @@ namespace Library
 
         private static void AddRental()
         {
-            Console.WriteLine("Enter ISBN");
+           
             int? BookISBN = Int32.Parse(Console.ReadLine());
-            if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
+            var hasOpenRentals = Context.Rental.Any(m => m.Book.ISBN == BookISBN && !m.returned);
+            if (hasOpenRentals)
+            {
+                Console.WriteLine("The Book is already rented");
+            }
+
+            /*if (Context.Rental.Find(BookISBN).Book.ISBN == BookISBN)
             {
                 Console.WriteLine("The Book is already rented");
 
-            }
-
+            }*/
+            
             Console.WriteLine("Enter the firstname of the Customer");
             var customerfirstname = Console.ReadLine();
             Rental rental = new Rental();
